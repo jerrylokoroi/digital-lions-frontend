@@ -115,7 +115,15 @@ function App() {
     <div className="app">
       <header className="app-header">
         <div className="container">
-          <h1 className="app-title">Digital Lions Impact Dashboard</h1>
+          <div className="header-brand">
+            <img 
+              src="/Assets/logo_DL.jpg" 
+              alt="Digital Lions logo" 
+              className="header-logo"
+            />
+            <span className="header-brand-name">Digital Lions</span>
+          </div>
+          <h1 className="app-title">Impact Dashboard</h1>
           <p className="app-subtitle">
             Transforming communities through innovative digital solutions
           </p>
@@ -208,8 +216,21 @@ function App() {
       </main>
 
       <footer className="app-footer">
-        <div className="container">
-          <p>&copy; 2026 Digital Lions. Making an impact, one story at a time.</p>
+        <div className="container footer-content">
+          <div className="footer-brand">
+            <img 
+              src="/Assets/logo_DL.jpg" 
+              alt="Digital Lions logo" 
+              className="footer-logo"
+            />
+            <span className="footer-brand-name">Digital Lions</span>
+          </div>
+          <p className="footer-text">
+            Impact Dashboard — A technical assessment project
+          </p>
+          <p className="footer-copyright">
+            &copy; 2026 Digital Lions. Building a Fair Trade digital economy.
+          </p>
         </div>
       </footer>
 

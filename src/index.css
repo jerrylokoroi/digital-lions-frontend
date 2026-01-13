@@ -5,22 +5,25 @@
   }
   
   :root {
-    --primary-color: #2563eb;
-    --primary-hover: #1d4ed8;
-    --secondary-color: #64748b;
+    /* Digital Lions Brand Colors */
+    --primary-color: #F59E0B; /* Warm amber/orange - Digital Lions primary */
+    --primary-hover: #D97706; /* Darker amber for hover states */
+    --secondary-color: #0891B2; /* Teal accent - Digital Lions secondary */
+    --secondary-hover: #0E7490; /* Darker teal */
     --success-color: #10b981;
     --danger-color: #ef4444;
     --background: #ffffff;
-    --surface: #f8fafc;
-    --text-primary: #0f172a;
-    --text-secondary: #475569;
-    --border-color: #e2e8f0;
+    --surface: #fafaf9; /* Warmer off-white */
+    --text-primary: #1c1917; /* Warmer black (stone-900) */
+    --text-secondary: #57534e; /* Warm gray (stone-600) */
+    --border-color: #e7e5e4; /* Warm gray border (stone-200) */
+    --accent-light: #fef3c7; /* Light amber background */
     --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-    --radius-sm: 4px;
-    --radius-md: 8px;
-    --radius-lg: 12px;
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 10px 20px -3px rgba(0, 0, 0, 0.1);
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
     --transition: all 0.2s ease;
   }
   
@@ -32,7 +35,9 @@
     -moz-osx-font-smoothing: grayscale;
     color: var(--text-primary);
     background-color: var(--surface);
-    line-height: 1.6;
+    line-height: 1.7; /* More breathing room, agency-style */
+    font-weight: 400;
+    letter-spacing: -0.01em; /* Slight tightening for professional look */
   }
   
   button {
@@ -44,8 +49,14 @@
   }
   
   button:focus-visible {
-    outline: 2px solid var(--primary-color);
-    outline-offset: 2px;
+    outline: 3px solid var(--primary-color); /* Amber outline for brand consistency */
+    outline-offset: 3px;
+  }
+  
+  a:focus-visible {
+    outline: 3px solid var(--primary-color);
+    outline-offset: 3px;
+    border-radius: var(--radius-sm);
   }
   
   input {

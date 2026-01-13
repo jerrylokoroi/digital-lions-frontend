@@ -2,16 +2,18 @@
     background-color: var(--background);
     border-radius: var(--radius-lg);
     overflow: hidden;
-    box-shadow: var(--shadow-md);
-    transition: var(--transition);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06); /* Softer shadow */
+    transition: all 0.3s ease;
     display: flex;
     flex-direction: column;
     height: 100%;
+    border: 1px solid var(--border-color); /* Subtle border for definition */
   }
   
   .project-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-lg);
+    transform: translateY(-6px); /* Slightly more lift */
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1); /* Enhanced but natural shadow */
+    border-color: rgba(245, 158, 11, 0.2); /* Subtle amber tint on hover */
   }
   
   .card-image-container {
@@ -80,13 +82,14 @@
     position: absolute;
     top: 12px;
     right: 12px;
-    background-color: rgba(255, 255, 255, 0.95);
-    color: var(--text-primary);
-    padding: 6px 12px;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 6px 14px;
     border-radius: var(--radius-md);
     font-size: 0.75rem;
-    font-weight: 600;
-    box-shadow: var(--shadow-sm);
+    font-weight: 700;
+    letter-spacing: 0.025em;
+    box-shadow: 0 2px 8px rgba(245, 158, 11, 0.4); /* Amber glow */
   }
   
   .card-content {
@@ -102,20 +105,21 @@
   
   .card-title {
     font-size: 1.25rem;
-    font-weight: 600;
-    margin-bottom: 8px;
+    font-weight: 700; /* Bolder for agency aesthetic */
+    margin-bottom: 10px;
     color: var(--text-primary);
-    line-height: 1.3;
+    line-height: 1.35;
+    letter-spacing: -0.02em;
   }
   
   .card-category {
     display: inline-block;
-    padding: 4px 12px;
-    background-color: var(--surface);
-    color: var(--primary-color);
-    border-radius: var(--radius-sm);
+    padding: 5px 14px;
+    background-color: var(--accent-light); /* Warm amber background */
+    color: var(--primary-hover); /* Darker amber text for contrast */
+    border-radius: var(--radius-md);
     font-size: 0.75rem;
-    font-weight: 600;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.5px;
   }
@@ -189,17 +193,21 @@
     align-items: center;
     justify-content: center;
     gap: 6px;
-    padding: 10px 20px;
+    padding: 11px 20px;
     background-color: var(--primary-color);
     color: white;
     border-radius: var(--radius-md);
-    font-weight: 500;
-    transition: var(--transition);
+    font-weight: 600; /* Bolder */
+    font-size: 0.9375rem;
+    letter-spacing: -0.01em;
+    box-shadow: 0 2px 6px rgba(245, 158, 11, 0.25); /* Amber glow */
+    transition: all 0.25s ease;
   }
   
   .details-button:hover {
     background-color: var(--primary-hover);
     transform: translateX(2px);
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.35); /* Enhanced glow */
   }
   
   .arrow-icon {

@@ -21,19 +21,20 @@
   
   .search-input {
     width: 100%;
-    padding: 14px 48px 14px 48px;
+    padding: 15px 48px 15px 48px; /* Slightly more padding */
     font-size: 1rem;
     border: 2px solid var(--border-color);
     border-radius: var(--radius-lg);
     background-color: var(--background);
     color: var(--text-primary);
-    transition: var(--transition);
+    transition: all 0.25s ease;
   }
   
   .search-input:focus {
     outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    border-color: var(--primary-color); /* Warm amber border on focus */
+    box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.12); /* Amber glow */
+    background-color: #fffbf5; /* Subtle warm tint */
   }
   
   .search-input::placeholder {

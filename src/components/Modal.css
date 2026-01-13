@@ -92,13 +92,14 @@
     position: absolute;
     top: 16px;
     left: 16px;
-    background-color: rgba(255, 255, 255, 0.95);
-    color: var(--text-primary);
-    padding: 8px 16px;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 8px 18px;
     border-radius: var(--radius-md);
     font-size: 0.875rem;
-    font-weight: 600;
-    box-shadow: var(--shadow-sm);
+    font-weight: 700;
+    letter-spacing: 0.025em;
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
   }
   
   .modal-body {
@@ -110,21 +111,22 @@
   }
   
   .modal-title {
-    font-size: 1.875rem;
-    font-weight: 700;
-    margin-bottom: 12px;
+    font-size: 2rem; /* Slightly larger */
+    font-weight: 800; /* Extra bold for impact */
+    margin-bottom: 14px;
     color: var(--text-primary);
     line-height: 1.2;
+    letter-spacing: -0.03em;
   }
   
   .modal-category {
     display: inline-block;
-    padding: 6px 16px;
-    background-color: var(--surface);
-    color: var(--primary-color);
-    border-radius: var(--radius-sm);
+    padding: 7px 18px;
+    background-color: var(--accent-light);
+    color: var(--primary-hover);
+    border-radius: var(--radius-md);
     font-size: 0.875rem;
-    font-weight: 600;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.5px;
   }
@@ -147,10 +149,27 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 12px 24px;
-    background-color: var(--surface);
-    border: 2px solid var(--border-color);
+    padding: 13px 28px;
+    background-color: var(--primary-color);
+    color: white;
     border-radius: var(--radius-md);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    letter-spacing: -0.01em;
+    box-shadow: 0 3px 8px rgba(245, 158, 11, 0.25);
+    transition: all 0.25s ease;
+  }
+  
+  .modal-like-button:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(245, 158, 11, 0.35);
+  }
+  
+  .modal-like-button .heart-icon {
+    width: 20px;
+    height: 20px;
+  }
     color: var(--text-primary);
     font-weight: 600;
     font-size: 1rem;
