@@ -1,13 +1,29 @@
 export function filterStories(stories, searchQuery) {
-    if (!searchQuery.trim()) {
-      return stories;
-    }
-  
-    const query = searchQuery.toLowerCase().trim();
-  
-    return stories.filter((story) => {
-      const titleMatch = story.title.toLowerCase().includes(query);
-      const categoryMatch = story.category.toLowerCase().includes(query);
-      return titleMatch || categoryMatch;
-    });
+  // Handle null/undefined stories array
+  if (!Array.isArray(stories)) {
+    return [];
   }
+
+  // Handle empty, null, or whitespace-only queries
+  if (!searchQuery || typeof searchQuery !== 'string' || !searchQuery.trim()) {
+    return stories;
+  }
+
+  // Normalize query: lowercase, trim, collapse multiple spaces
+  const query = searchQuery
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, ' ');
+
+  return stories.filter((story) => {
+    // Safely handle missing or invalid story properties
+    if (!story || typeof story !== 'object') {
+      return false;
+    }
+
+    const title = String(story.title || '').toLowerCase();
+    const category = String(story.category || '').toLowerCase();
+    
+    return title.includes(query) || category.includes(query);
+  });
+}

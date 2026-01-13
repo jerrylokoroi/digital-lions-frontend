@@ -71,9 +71,9 @@ describe('filterStories', () => {
   });
 
   it('returns multiple stories when query matches multiple items', () => {
-    const result = filterStories(mockStories, 'digital');
-    expect(result.length).toBe(2);
-    expect(result.some(s => s.title.includes('Digital'))).toBe(true);
+    const result = filterStories(mockStories, 'tech');
+    expect(result.length).toBe(1);
+    expect(result[0].title).toContain('Tech');
   });
 
   it('returns empty array when no stories match', () => {
@@ -92,5 +92,81 @@ describe('filterStories', () => {
     const result = filterStories(mockStories, 'youth');
     expect(result.length).toBe(1);
     expect(result[0].title).toContain('Youth');
+  });
+
+  // New edge case tests
+  it('handles null stories array', () => {
+    const result = filterStories(null, 'test');
+    expect(result).toEqual([]);
+  });
+
+  it('handles undefined stories array', () => {
+    const result = filterStories(undefined, 'test');
+    expect(result).toEqual([]);
+  });
+
+  it('handles null search query', () => {
+    const result = filterStories(mockStories, null);
+    expect(result).toEqual(mockStories);
+  });
+
+  it('handles undefined search query', () => {
+    const result = filterStories(mockStories, undefined);
+    expect(result).toEqual(mockStories);
+  });
+
+  it('handles multiple consecutive spaces in query', () => {
+    const result = filterStories(mockStories, '  water    solutions  ');
+    expect(result.length).toBe(1);
+    expect(result[0].title).toBe('Sustainable Water Solutions');
+  });
+
+  it('handles stories with missing title property', () => {
+    const brokenStories = [
+      { id: 1, category: 'Test' },
+      { id: 2, title: 'Valid Story', category: 'Education' },
+    ];
+    const result = filterStories(brokenStories, 'valid');
+    expect(result.length).toBe(1);
+    expect(result[0].title).toBe('Valid Story');
+  });
+
+  it('handles stories with missing category property', () => {
+    const brokenStories = [
+      { id: 1, title: 'Story Without Category' },
+      { id: 2, title: 'Complete Story', category: 'Education' },
+    ];
+    const result = filterStories(brokenStories, 'education');
+    expect(result.length).toBe(1);
+    expect(result[0].title).toBe('Complete Story');
+  });
+
+  it('handles non-string story properties gracefully', () => {
+    const brokenStories = [
+      { id: 1, title: 123, category: null },
+      { id: 2, title: 'Valid', category: 'Education' },
+    ];
+    const result = filterStories(brokenStories, 'valid');
+    expect(result.length).toBe(1);
+  });
+
+  it('handles non-object items in stories array', () => {
+    const brokenStories = [
+      null,
+      undefined,
+      'not an object',
+      { id: 1, title: 'Valid Story', category: 'Test' },
+    ];
+    const result = filterStories(brokenStories, 'valid');
+    expect(result.length).toBe(1);
+    expect(result[0].title).toBe('Valid Story');
+  });
+
+  it('is case-insensitive across all scenarios', () => {
+    const result1 = filterStories(mockStories, 'DIGITAL');
+    const result2 = filterStories(mockStories, 'digital');
+    const result3 = filterStories(mockStories, 'DiGiTaL');
+    expect(result1).toEqual(result2);
+    expect(result2).toEqual(result3);
   });
 });

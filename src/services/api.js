@@ -1,44 +1,94 @@
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
 
-export async function fetchStories() {
-  const response = await fetch(`${API_BASE_URL}/stories`);
-  if (!response.ok) {
-    throw new Error('Failed to fetch stories');
+class ApiError extends Error {
+  constructor(message, status, isNetworkError = false) {
+    super(message);
+    this.name = 'ApiError';
+    this.status = status;
+    this.isNetworkError = isNetworkError;
   }
+}
+
+async function fetchWithRetry(url, options = {}, retries = 2) {
+  for (let i = 0; i <= retries; i++) {
+    try {
+      const response = await fetch(url, {
+        ...options,
+        signal: options.signal || AbortSignal.timeout(10000), // 10s timeout
+      });
+      
+      if (!response.ok) {
+        const errorMessage = `Server error: ${response.status} ${response.statusText}`;
+        throw new ApiError(errorMessage, response.status, false);
+      }
+      
+      return response;
+    } catch (error) {
+      const isLastAttempt = i === retries;
+      
+      // Network errors (offline, DNS failure, timeout)
+      if (error.name === 'TypeError' || error.name === 'AbortError') {
+        if (isLastAttempt) {
+          throw new ApiError(
+            'Network error. Please check your connection.',
+            0,
+            true
+          );
+        }
+        // Wait before retry (exponential backoff)
+        await new Promise(resolve => setTimeout(resolve, Math.pow(2, i) * 500));
+        continue;
+      }
+      
+      // API errors - don't retry
+      if (error instanceof ApiError) {
+        throw error;
+      }
+      
+      // Unknown errors
+      if (isLastAttempt) {
+        throw new ApiError('An unexpected error occurred.', 0, false);
+      }
+    }
+  }
+}
+
+export async function fetchStories() {
+  const response = await fetchWithRetry(`${API_BASE_URL}/stories`);
   return response.json();
 }
 
 export async function fetchStoryById(id) {
-  const response = await fetch(`${API_BASE_URL}/stories/${id}`);
-  if (!response.ok) {
-    throw new Error('Failed to fetch story details');
+  if (!id) {
+    throw new ApiError('Story ID is required', 400, false);
   }
+  const response = await fetchWithRetry(`${API_BASE_URL}/stories/${id}`);
   return response.json();
 }
 
 export async function likeStory(id) {
-  const response = await fetch(`${API_BASE_URL}/stories/${id}/like`, {
+  if (!id) {
+    throw new ApiError('Story ID is required', 400, false);
+  }
+  const response = await fetchWithRetry(`${API_BASE_URL}/stories/${id}/like`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
   });
-  if (!response.ok) {
-    throw new Error('Failed to like story');
-  }
   return response.json();
 }
 
 export async function createStory(storyData) {
-  const response = await fetch(`${API_BASE_URL}/stories`, {
+  if (!storyData || !storyData.title) {
+    throw new ApiError('Story data with title is required', 400, false);
+  }
+  const response = await fetchWithRetry(`${API_BASE_URL}/stories`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(storyData),
   });
-  if (!response.ok) {
-    throw new Error('Failed to create story');
-  }
   return response.json();
 }

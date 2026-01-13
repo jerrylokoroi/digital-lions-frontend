@@ -15,6 +15,7 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [modalLoading, setModalLoading] = useState(false);
+  const [searchAnnouncement, setSearchAnnouncement] = useState('');
 
   useEffect(() => {
     loadStories();
@@ -23,7 +24,19 @@ function App() {
   useEffect(() => {
     const filtered = filterStories(stories, searchQuery);
     setFilteredStories(filtered);
-  }, [stories, searchQuery]);
+    
+    // Announce results to screen readers
+    if (!loading && stories.length > 0) {
+      const count = filtered.length;
+      if (searchQuery.trim()) {
+        setSearchAnnouncement(
+          `Found ${count} ${count === 1 ? 'story' : 'stories'} matching "${searchQuery}"`
+        );
+      } else {
+        setSearchAnnouncement(`Showing all ${count} ${count === 1 ? 'story' : 'stories'}`);
+      }
+    }
+  }, [stories, searchQuery, loading]);
 
   const loadStories = async () => {
     try {
@@ -41,8 +54,24 @@ function App() {
   };
 
   const handleLike = async (id) => {
+    // Optimistic update - update UI immediately
+    const updateStoryLikes = (increment) => {
+      setStories(prevStories =>
+        prevStories.map(story =>
+          story.id === id ? { ...story, likes: story.likes + increment } : story
+        )
+      );
+      if (selectedStory && selectedStory.id === id) {
+        setSelectedStory(prev => ({ ...prev, likes: prev.likes + increment }));
+      }
+    };
+
+    // Immediately increment like count
+    updateStoryLikes(1);
+
     try {
       const updatedStory = await likeStory(id);
+      // Sync with actual server response
       setStories(prevStories =>
         prevStories.map(story =>
           story.id === id ? { ...story, likes: updatedStory.likes } : story
@@ -52,7 +81,10 @@ function App() {
         setSelectedStory({ ...selectedStory, likes: updatedStory.likes });
       }
     } catch (err) {
+      // Rollback on error
+      updateStoryLikes(-1);
       console.error('Error liking story:', err);
+      // Could show a toast notification here
     }
   };
 
@@ -92,6 +124,16 @@ function App() {
 
       <main className="app-main">
         <div className="container">
+          {/* Screen reader announcement for search results */}
+          <div
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
+            className="sr-only"
+          >
+            {searchAnnouncement}
+          </div>
+
           <SearchBar onSearch={handleSearch} searchQuery={searchQuery} />
 
           {loading && (

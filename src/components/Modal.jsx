@@ -4,6 +4,7 @@ import './Modal.css';
 function Modal({ story, onClose, onLike, loading }) {
   const modalRef = useRef(null);
   const closeButtonRef = useRef(null);
+  const announcementRef = useRef(null);
 
   useEffect(() => {
     const handleEscape = (e) => {
@@ -24,6 +25,19 @@ function Modal({ story, onClose, onLike, loading }) {
       document.body.style.overflow = 'unset';
     };
   }, [onClose]);
+
+  // Announce to screen readers when content loads
+  useEffect(() => {
+    if (announcementRef.current) {
+      if (loading) {
+        announcementRef.current.textContent = 'Loading story details...';
+      } else if (story) {
+        announcementRef.current.textContent = `Story details loaded: ${story.title}`;
+      } else {
+        announcementRef.current.textContent = 'Failed to load story details';
+      }
+    }
+  }, [loading, story]);
 
   useEffect(() => {
     const trapFocus = (e) => {
@@ -64,7 +78,17 @@ function Modal({ story, onClose, onLike, loading }) {
       role="dialog"
       aria-modal="true"
       aria-labelledby="modal-title"
+      aria-describedby={story ? 'modal-description' : undefined}
     >
+      {/* Screen reader announcements */}
+      <div
+        ref={announcementRef}
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+        className="sr-only"
+      />
+      
       <div className="modal-content" ref={modalRef}>
         <button
           ref={closeButtonRef}
@@ -108,7 +132,7 @@ function Modal({ story, onClose, onLike, loading }) {
                 <span className="modal-category">{story.category}</span>
               </div>
 
-              <p className="modal-description">{story.description}</p>
+              <p id="modal-description" className="modal-description">{story.description}</p>
 
               <div className="modal-footer">
                 <button
