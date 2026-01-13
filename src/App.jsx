@@ -71,14 +71,17 @@ function App() {
 
     try {
       const updatedStory = await likeStory(id);
-      // Sync with actual server response
+      
+      // Sync with actual server response - use entire story object
       setStories(prevStories =>
         prevStories.map(story =>
-          story.id === id ? { ...story, likes: updatedStory.likes } : story
+          story.id === id ? updatedStory : story
         )
       );
+      
+      // Update selected story if modal is open
       if (selectedStory && selectedStory.id === id) {
-        setSelectedStory({ ...selectedStory, likes: updatedStory.likes });
+        setSelectedStory(updatedStory);
       }
     } catch (err) {
       // Rollback on error
@@ -115,18 +118,21 @@ function App() {
     <div className="app">
       <header className="app-header">
         <div className="container">
-          <div className="header-brand">
-            <img 
-              src="/Assets/logo_DL.jpg" 
-              alt="Digital Lions logo" 
-              className="header-logo"
-            />
-            <span className="header-brand-name">Digital Lions</span>
+          <div className="header-content">
+            <div className="header-logo-wrapper">
+              <img 
+                src="/Assets/logo_DL.jpg" 
+                alt="Digital Lions logo" 
+                className="header-logo"
+              />
+            </div>
+            <div className="header-text">
+              <h1 className="app-title">Impact Dashboard</h1>
+              <p className="app-subtitle">
+                Transforming communities through innovative digital solutions
+              </p>
+            </div>
           </div>
-          <h1 className="app-title">Impact Dashboard</h1>
-          <p className="app-subtitle">
-            Transforming communities through innovative digital solutions
-          </p>
         </div>
       </header>
 
