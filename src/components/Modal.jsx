@@ -120,7 +120,7 @@ function Modal({ story, onClose, onLike, loading }) {
                 className="modal-image"
               />
               {story.isFeatured && (
-                <span className="modal-featured-badge">⭐ Featured</span>
+                <span className="modal-featured-badge">Featured</span>
               )}
             </div>
 

@@ -121,7 +121,7 @@ function App() {
           <div className="header-content">
             <div className="header-logo-wrapper">
               <img 
-                src="/logo_DL.jpg" 
+                src="/Assets/logo_DL.png" 
                 alt="Digital Lions logo" 
                 className="header-logo"
               />
@@ -225,7 +225,7 @@ function App() {
         <div className="container footer-content">
           <div className="footer-brand">
             <img 
-              src="/logo_DL.jpg" 
+              src="/Assets/logo_DL.png" 
               alt="Digital Lions logo" 
               className="footer-logo"
             />

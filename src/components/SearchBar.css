@@ -1,5 +1,5 @@
 .search-bar {
-    margin-bottom: 8px;
+    margin-bottom: var(--space-2);
   }
   
   .search-input-wrapper {
@@ -13,32 +13,37 @@
     left: 16px;
     top: 50%;
     transform: translateY(-50%);
-    width: 20px;
-    height: 20px;
-    color: var(--secondary-color);
+    width: 18px;
+    height: 18px;
+    color: var(--text-muted);
     pointer-events: none;
+    opacity: 0.9;
   }
   
   .search-input {
     width: 100%;
-    padding: 15px 48px 15px 48px; /* Slightly more padding */
-    font-size: 1rem;
-    border: 2px solid var(--border-color);
+    padding: 12px 44px 12px 44px;
+    font-size: 0.975rem;
+    border: 1px solid var(--border);
     border-radius: var(--radius-lg);
-    background-color: var(--background);
-    color: var(--text-primary);
-    transition: all 0.25s ease;
+    background-color: var(--surface);
+    color: var(--text);
+    box-shadow: var(--shadow-sm);
+    transition: border-color var(--transition), box-shadow var(--transition), background-color var(--transition);
   }
   
   .search-input:focus {
     outline: none;
-    border-color: var(--primary-color); /* Warm amber border on focus */
-    box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.12); /* Amber glow */
-    background-color: #fffbf5; /* Subtle warm tint */
+    border-color: rgba(245, 158, 11, 0.45);
+    box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.12);
   }
   
+  .search-input:focus-visible {
+    outline: none;
+  }
+
   .search-input::placeholder {
-    color: var(--secondary-color);
+    color: rgba(87, 83, 78, 0.75);
   }
   
   .clear-button {
@@ -46,14 +51,14 @@
     right: 12px;
     top: 50%;
     transform: translateY(-50%);
-    width: 32px;
-    height: 32px;
+    width: 30px;
+    height: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    color: var(--secondary-color);
-    transition: var(--transition);
+    color: var(--text-muted);
+    transition: background-color var(--transition), color var(--transition);
   }
   
   .clear-button svg {
@@ -62,8 +67,8 @@
   }
   
   .clear-button:hover {
-    background-color: var(--surface);
-    color: var(--text-primary);
+    background-color: var(--surface-muted);
+    color: var(--text);
   }
   
   @media (max-width: 768px) {

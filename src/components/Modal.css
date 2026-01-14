@@ -4,13 +4,13 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.75);
+    background-color: rgba(0, 0, 0, 0.72);
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 1000;
     padding: 16px;
-    animation: fadeIn 0.2s ease;
+    animation: fadeIn 0.12s ease;
   }
   
   @keyframes fadeIn {
@@ -23,27 +23,15 @@
   }
   
   .modal-content {
-    background-color: var(--background);
+    background-color: var(--surface);
     border-radius: var(--radius-lg);
     max-width: 700px;
     width: 100%;
     max-height: 90vh;
     overflow-y: auto;
     position: relative;
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
-      0 10px 10px -5px rgba(0, 0, 0, 0.04);
-    animation: slideUp 0.3s ease;
-  }
-  
-  @keyframes slideUp {
-    from {
-      transform: translateY(20px);
-      opacity: 0;
-    }
-    to {
-      transform: translateY(0);
-      opacity: 1;
-    }
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22);
   }
   
   .modal-close {
@@ -57,16 +45,18 @@
     justify-content: center;
     background-color: rgba(255, 255, 255, 0.95);
     border-radius: 50%;
-    color: var(--text-primary);
+    color: var(--text);
     z-index: 10;
-    box-shadow: var(--shadow-md);
-    transition: var(--transition);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    transition: background-color var(--transition), box-shadow var(--transition), transform var(--transition), color var(--transition);
   }
   
   .modal-close:hover {
-    background-color: var(--danger-color);
-    color: white;
-    transform: rotate(90deg);
+    background-color: var(--surface-muted);
+    color: var(--text);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
   }
   
   .modal-close svg {
@@ -92,114 +82,83 @@
     position: absolute;
     top: 16px;
     left: 16px;
-    background-color: var(--primary-color);
+    background-color: rgba(28, 25, 23, 0.72);
     color: white;
-    padding: 8px 18px;
-    border-radius: var(--radius-md);
-    font-size: 0.875rem;
-    font-weight: 700;
-    letter-spacing: 0.025em;
-    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+    padding: 7px 10px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 650;
+    letter-spacing: 0.01em;
   }
   
   .modal-body {
-    padding: 32px;
+    padding: var(--space-8);
   }
   
   .modal-header {
-    margin-bottom: 24px;
+    margin-bottom: var(--space-6);
   }
   
   .modal-title {
-    font-size: 2rem; /* Slightly larger */
-    font-weight: 800; /* Extra bold for impact */
-    margin-bottom: 14px;
-    color: var(--text-primary);
+    font-size: 1.75rem;
+    font-weight: 750;
+    margin-bottom: 10px;
+    color: var(--text);
     line-height: 1.2;
     letter-spacing: -0.03em;
   }
   
   .modal-category {
     display: inline-block;
-    padding: 7px 18px;
-    background-color: var(--accent-light);
-    color: var(--primary-hover);
-    border-radius: var(--radius-md);
-    font-size: 0.875rem;
-    font-weight: 700;
+    padding: 4px 10px;
+    background-color: transparent;
+    color: var(--text-muted);
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    font-size: 0.75rem;
+    font-weight: 650;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.06em;
   }
   
   .modal-description {
-    font-size: 1.0625rem;
-    line-height: 1.8;
-    color: var(--text-secondary);
-    margin-bottom: 32px;
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--text-muted);
+    margin-bottom: var(--space-8);
   }
   
   .modal-footer {
     display: flex;
     justify-content: flex-start;
-    padding-top: 24px;
-    border-top: 1px solid var(--border-color);
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--border);
   }
   
   .modal-like-button {
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 13px 28px;
-    background-color: var(--primary-color);
+    padding: 12px 18px;
+    background-color: var(--brand-amber);
     color: white;
     border-radius: var(--radius-md);
-    font-weight: 600;
+    font-weight: 650;
     font-size: 0.9375rem;
     letter-spacing: -0.01em;
-    box-shadow: 0 3px 8px rgba(245, 158, 11, 0.25);
-    transition: all 0.25s ease;
+    box-shadow: var(--shadow-sm);
+    transition: background-color var(--transition), transform var(--transition), box-shadow var(--transition);
   }
   
   .modal-like-button:hover {
-    background-color: var(--primary-hover);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(245, 158, 11, 0.35);
+    background-color: var(--brand-amber-strong);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
   }
   
   .modal-like-button .heart-icon {
     width: 20px;
     height: 20px;
-  }
-    color: var(--text-primary);
-    font-weight: 600;
-    font-size: 1rem;
-    transition: var(--transition);
-  }
-  
-  .modal-like-button:hover {
-    border-color: var(--danger-color);
-    color: var(--danger-color);
-    background-color: rgba(239, 68, 68, 0.05);
-  }
-  
-  .modal-like-button .heart-icon {
-    width: 20px;
-    height: 20px;
-  }
-  
-  .modal-like-button:hover .heart-icon {
-    fill: var(--danger-color);
-    stroke: var(--danger-color);
-    animation: heartbeat 0.3s ease;
-  }
-  
-  @keyframes heartbeat {
-    0%, 100% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(1.2);
-    }
   }
   
   .modal-loading,
@@ -210,14 +169,14 @@
     justify-content: center;
     padding: 64px 32px;
     text-align: center;
-    color: var(--text-secondary);
+    color: var(--text-muted);
   }
   
   .modal-loading .spinner {
     width: 48px;
     height: 48px;
-    border: 4px solid var(--border-color);
-    border-top-color: var(--primary-color);
+    border: 4px solid var(--border);
+    border-top-color: var(--brand-amber);
     border-radius: 50%;
     animation: spin 0.8s linear infinite;
     margin-bottom: 16px;

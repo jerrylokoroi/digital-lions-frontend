@@ -62,7 +62,7 @@ function ProjectCard({ story, onLike, onViewDetails }) {
         )}
         {story.isFeatured && (
           <span className="featured-badge" aria-label="Featured story">
-            ⭐ Featured
+            Featured
           </span>
         )}
       </div>
