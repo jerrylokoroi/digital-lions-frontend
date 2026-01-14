@@ -12,10 +12,10 @@
   }
   
   .app-header {
-    background-color: var(--surface);
-    color: var(--text);
+    background-color: #111827; /* dark, echoing site hero but scaled down */
+    color: #f9fafb;
     padding: var(--space-8) 0;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid #020617;
   }
   
   .header-content {
@@ -42,18 +42,43 @@
     flex: 1;
     text-align: left;
   }
+
+  .header-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: rgba(249, 250, 251, 0.7);
+  }
+
+  .header-kicker-brand {
+    font-weight: 600;
+    color: var(--brand-amber);
+  }
+
+  .header-kicker-dot {
+    opacity: 0.5;
+  }
+
+  .header-kicker-label {
+    font-weight: 500;
+  }
   
   .app-title {
     font-size: 2rem;
     font-weight: 750;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
     letter-spacing: -0.03em;
     line-height: 1.15;
+    color: #f9fafb;
   }
   
   .app-subtitle {
     font-size: 0.975rem;
-    color: var(--text-muted);
+    color: rgba(249, 250, 251, 0.72);
     font-weight: 450;
     letter-spacing: -0.01em;
     line-height: 1.5;

@@ -127,9 +127,14 @@ function App() {
               />
             </div>
             <div className="header-text">
+              <div className="header-kicker">
+                <span className="header-kicker-brand">Digital Lions</span>
+                <span className="header-kicker-dot">•</span>
+                <span className="header-kicker-label">Internal impact dashboard</span>
+              </div>
               <h1 className="app-title">Impact Dashboard</h1>
               <p className="app-subtitle">
-                Transforming communities through innovative digital solutions
+                Fair Trade digital projects and stories across teams and partners.
               </p>
             </div>
           </div>
